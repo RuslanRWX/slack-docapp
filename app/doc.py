@@ -1,6 +1,26 @@
-from flask import request, jsonify
+from flask import request, jsonify, Flask
 from .etcd_client import *
 import re
+
+#app = Flask(__name__)
+#app.config.from_object('config')
+#print(app.config['DEBUG'])
+#print(app.config['TOKEN'])
+
+def token_based_authentification():
+    # print(type(request.values['token']))
+     app = Flask(__name__)
+     app.config.from_object('config')
+    # print(type(app.config['TOKEN']))
+     if request.values['token'] != app.config['TOKEN']:
+         #raise ValueError("Token Error")
+         return "Error False"
+     else:
+         return True
+
+
+def abort():
+    return "Token error", 400
 
 def get_doc():
     #data = request.json
@@ -24,6 +44,6 @@ def put_doc():
     #return key[0]
  #   return put_etcd(key[0], ' '.join(str(e) for e in key[1:1000]))
    # return key
-    return put_etcd(key[0], ' '.join(str(e) for e in key[1:]))
+    return put_etcd(key[0], ''.join(str(e) for e in key[1:]))
    # #return get_etcd('testval')
 
