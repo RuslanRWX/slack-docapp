@@ -10,8 +10,8 @@ def index():
 
 @app.route('/doc', methods=['GET', 'POST'])
 def doc():
-    if token_based_authentification() is not True:
-        return abort()
+    #if token_based_authentification() is not True:
+    #    return abort()
     return(get_doc())
 
 @app.route('/add', methods=['GET', 'POST'])

@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  etcd:
+    container_name: etcd-server
+    image: bitnami/etcd:3
+    environment:
+    #  - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-server:2379
+      - ALLOW_NONE_AUTHENTICATION=yes
+    volumes:
+      - etcd-volume:/bitnami/etcd/data
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    networks:
+      - backend
+
+  slack-app:
+    build: ./flask
+    container_name: slack-app
+    environment:
+      - ETCD_SERVER=etcd-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - $PROJECT_PATH:/usr/src/app/
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: overlay
+
+
+volumes:
+  etcd-volume:
+    #driver: local
+
