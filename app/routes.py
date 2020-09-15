@@ -19,3 +19,10 @@ def add():
     if token_based_authentification() is not True:
         return abort()
     return(put_doc())
+
+@app.route('/help', methods=['GET', 'POST'])
+def help():
+    if token_based_authentification() is not True:
+        return abort()
+    return(help_doc())
+

@@ -26,5 +26,9 @@ def get_etcd(key):
     return etcd.get(key)[0]
 
 
-#print(get_etcd('key'))
+def help_doc():
+    data=[m.key.decode('UTF-8') for (_, m) in etcd.get_all()]
+    help_text = "\n/doc ".join(data)
+    return "HELP documentation keys:\n/doc "+help_text
+
 
