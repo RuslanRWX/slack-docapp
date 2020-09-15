@@ -43,3 +43,8 @@ def put_doc():
     return put_etcd(key[0], ''.join(str(e) for e in key[1:]))
    # #return get_etcd('testval')
 
+
+def delete_doc():
+    key=re.split('(\W)', request.values['text'])
+    return delete_etcd(key[0])
+

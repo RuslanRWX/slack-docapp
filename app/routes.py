@@ -26,3 +26,9 @@ def help():
         return abort()
     return(help_doc())
 
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    if token_based_authentification() is not True:
+        return abort()
+    return(delete_doc())
+

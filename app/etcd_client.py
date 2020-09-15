@@ -32,3 +32,7 @@ def help_doc():
     return "HELP documentation keys:\n/doc "+help_text
 
 
+def delete_etcd(key):
+    etcd.delete(key)
+    return key+" has been delete"
+
